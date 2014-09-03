@@ -1,0 +1,6 @@
+# Location tools
+gem 'geocoder'
+# Image upload handling
+gem 'paperclip'
+# JS libs/Front End
+gem 'foundation-rails'

@@ -1,6 +1,8 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
+
+  
   # GET /images
   # GET /images.json
   def index
@@ -69,6 +71,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:location, :photo, :tag_1, :tag_2, :tag_3)
+      params.require(:image).permit(:address, :latitude, :longitude, :photo, :tag_1, :tag_2, :tag_3)
     end
 end

@@ -14,8 +14,9 @@
 ActiveRecord::Schema.define(version: 20140902205426) do
 
   create_table "images", force: true do |t|
-    t.string   "location"
-    t.string   "photo"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "tag_1"
     t.string   "tag_2"
     t.string   "tag_3"

@@ -1,0 +1,6 @@
+<p><%= @coords %></p>
+<ul class="image_feed">
+  <% @images_near.each do |image| %> 
+  <li><%= image.address + " " + image.tag_1 %></li>
+  <% end %>
+</ul>

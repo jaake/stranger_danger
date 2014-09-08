@@ -1,12 +1,30 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
+  def location
+    location_data = []
+    self.params.each do |p|
+      location_data.append(p[1])
+    end
+    @coords = "#{location_data[0]}, #{location_data[1]}"
+    user_location = Geokit::Geocoders::GoogleGeocoder.geocode "#{@coords}"
+    images = Image.all 
+    @images_near = []
+    images.each do |image|
+      ll = [image.latitude, image.longitude]
+     @images_near.append(image) if (user_location.distance_to(ll) < 3) 
+    end
 
-  
+  end
+
   # GET /images
   # GET /images.json
   def index
     @images = Image.all
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   # GET /images/1
@@ -27,7 +45,6 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(image_params)
-
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }

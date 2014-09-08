@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 # Stranger Danger Gems 
 
 #   Location tools
-  gem 'geocoder'
+#  gem 'geocoder'
+  gem 'geokit'
 #   Image upload handling
   gem 'paperclip'
 #   JS/Frontend

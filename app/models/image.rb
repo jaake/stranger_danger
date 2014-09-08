@@ -1,11 +1,11 @@
 class Image < ActiveRecord::Base
 
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode, :if => :never_geocoded? # auto-fetch address
+ # reverse_geocoded_by :latitude, :longitude
+ # after_validation :reverse_geocode, :if => :never_geocoded? # auto-fetch address
 
-  def never_geocoded? 
-    new_record? ? true : false
-  end
+ # def never_geocoded? 
+ #   new_record? ? true : false
+ # end
 
 
   has_attached_file :photo, :styles => { :small => "150x150>" },

@@ -7,7 +7,6 @@ class CreateImages < ActiveRecord::Migration
       t.string :tag_1
       t.string :tag_2
       t.string :tag_3
-
       t.timestamps
     end
   end

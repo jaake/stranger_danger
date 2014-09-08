@@ -1,12 +1,24 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
+  def location
+    location_data = []
+    self.params.each do |p|
+      location_data.append(p[1])
+    end
+    @lat = location_data[0]
+    @long = location_data[1]
+    @address = Geocoder.search('@lat, @long')
+  end
 
-  
   # GET /images
   # GET /images.json
   def index
     @images = Image.all
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   # GET /images/1
@@ -27,7 +39,6 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(image_params)
-
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }

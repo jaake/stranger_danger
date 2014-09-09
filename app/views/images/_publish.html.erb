@@ -1,11 +1,3 @@
-
-<% self.params.each do |param| %>
-  <%= param %>
-<% end %>
-<br>
-<div class="image_feed">
-</div>
-
 <div class="publish">
   <%= form_for(@image) do |f| %>
   <% if @image.errors.any? %>
@@ -18,19 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.file_field :photo %>
-  </div>    
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <p><%= f.file_field :photo %></p>
+  <%= f.submit %>
 </div>
-
-<div class="control">
-  <p class="button round">Publish</p>
-</div>
-  <% end %>
-<br>
-
-<%= link_to 'New Image', new_image_path %>
-
+<% end %>

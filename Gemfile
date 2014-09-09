@@ -9,6 +9,8 @@ source 'https://rubygems.org'
   gem 'paperclip'
 #   JS/Frontend
   gem 'foundation-rails'
+#   Hash tag handling
+  gem 'simple_hashtag'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'

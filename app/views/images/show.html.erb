@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<% self.params.each do |param| %>
+  <%= param + @coords %>
+<% end %>
 <p>
   <strong>Address:</strong>
   <%= @image.address %>

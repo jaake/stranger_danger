@@ -12,14 +12,42 @@ class ImagesController < ApplicationController
     @images_near = []
     images.each do |image|
       ll = [image.latitude, image.longitude]
-     @images_near.append(image) if (user_location.distance_to(ll) < 3) 
+      distance = user_location.distance_to(ll)
+      bearing = user_location.heading_to(ll)
+      holder = [image, distance.round(2), bearing.round]
+      @images_near.append(holder) if (distance < 10) 
     end
+  end
 
+  def publish
+    location_data = []
+    self.params.each do |p|
+      location_data.append(p[1])
+    end
+    @coords = "#{location_data[0]}, #{location_data[1]}"
+    user_location = Geokit::Geocoders::GoogleGeocoder.geocode "#{@coords}"
+    self[:latitude] = "#{location_data[0]}"
+    self[:longitude] = "#{location_data[1]}"
+    self[:tag_1] = "#{location_data[2]}"
+    self[:tag_2] = "#{location_data[3]}"
+    self[:tag_3] = "#{location_data[4]}"
+    self[:address] = user_location.full_address
+    @image = Image.new(image_params)
+    respond_to do |format|
+      if @image.save
+        format.html { redirect_to @image, notice: 'Image was successfully created.' }
+        format.json { render :show, status: :created, location: @image }
+      else
+        format.html { render :new }
+        format.json { render json: @image.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /images
   # GET /images.json
   def index
+    @image = Image.new
     @images = Image.all
     respond_to do |format|
       format.html
@@ -34,7 +62,6 @@ class ImagesController < ApplicationController
 
   # GET /images/new
   def new
-    @image = Image.new
   end
 
   # GET /images/1/edit

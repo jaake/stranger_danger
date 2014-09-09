@@ -1,6 +1,7 @@
-<p><%= @coords %></p>
+<p id="location"><%= @coords %></p>
 <ul class="image_feed">
   <% @images_near.each do |image| %> 
-  <li><%= image.address + " " + image.tag_1 %></li>
+  <li><%= image_tag image[0].photo.url %></li>
+  <li><%= image[0].address %> <%= image[1] %> Miles  <%= image[2] %> degrees NSEW</li>
   <% end %>
 </ul>

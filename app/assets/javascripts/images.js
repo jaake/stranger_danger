@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+  $(".control").on('click', 'p', pubLocation);
   getLocation();
 });
 
@@ -19,4 +20,20 @@ function pushPosition(position) {
       data: {latitude: position.coords.latitude, longitude: position.coords.longitude}
     })
 }
+
+function pubLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(publishImage);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function publishImage(position) {
+	$.ajax('publish.js', {
+      format: 'js',
+      data: {latitude: position.coords.latitude, longitude: position.coords.longitude}
+    })
+}
+
 

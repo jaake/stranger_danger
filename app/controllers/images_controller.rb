@@ -6,43 +6,46 @@ class ImagesController < ApplicationController
     self.params.each do |p|
       location_data.append(p[1])
     end
-    @coords = "#{location_data[0]}, #{location_data[1]}"
-    user_location = Geokit::Geocoders::GoogleGeocoder.geocode "#{@coords}"
+    lat = location_data[0]
+    lng = location_data[1]
+    @coords = [ lat, lng ]
+    user_location = Geokit::Geocoders::GoogleGeocoder.geocode("#{lat}, #{lng}")
     images = Image.all 
     @images_near = []
     images.each do |image|
-      ll = [image.latitude, image.longitude]
+      ll = ["#{image.latitude}", "#{image.longitude}"]
       distance = user_location.distance_to(ll)
       bearing = user_location.heading_to(ll)
-      holder = [image, distance.round(2), bearing.round]
-      @images_near.append(holder) if (distance < 10) 
+      latlng = user_location.ll
+      holder = [image, distance, bearing, latlng]
+      @images_near.append(holder) if (distance < 10000) 
     end
   end
 
-  def publish
-    location_data = []
-    self.params.each do |p|
-      location_data.append(p[1])
-    end
-    @coords = "#{location_data[0]}, #{location_data[1]}"
-    user_location = Geokit::Geocoders::GoogleGeocoder.geocode "#{@coords}"
-    self[:latitude] = "#{location_data[0]}"
-    self[:longitude] = "#{location_data[1]}"
-    self[:tag_1] = "#{location_data[2]}"
-    self[:tag_2] = "#{location_data[3]}"
-    self[:tag_3] = "#{location_data[4]}"
-    self[:address] = user_location.full_address
-    @image = Image.new(image_params)
-    respond_to do |format|
-      if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
-      else
-        format.html { render :new }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def publish
+  #   location_data = []
+  #   self.params.each do |p|
+  #     location_data.append(p[1])
+  #   end
+  #   @coords = "#{location_data[0]}, #{location_data[1]}"
+  #   user_location = Geokit::Geocoders::GoogleGeocoder.geocode "#{@coords}"
+  #   self[:latitude] = "#{location_data[0]}"
+  #   self[:longitude] = "#{location_data[1]}"
+  #   self[:tag_1] = "#{location_data[2]}"
+  #   self[:tag_2] = "#{location_data[3]}"
+  #   self[:tag_3] = "#{location_data[4]}"
+  #   self[:address] = user_location.full_address
+  #   @image = Image.new(image_params)
+  #   respond_to do |format|
+  #     if @image.save
+  #       format.html { redirect_to @image, notice: 'Image was successfully created.' }
+  #       format.json { render :show, status: :created, location: @image }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @image.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # GET /images
   # GET /images.json
@@ -61,8 +64,8 @@ class ImagesController < ApplicationController
   end
 
   # GET /images/new
-  def new
-  end
+  #def new
+  #end
 
   # GET /images/1/edit
   def edit
@@ -76,9 +79,11 @@ class ImagesController < ApplicationController
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
         format.json { render :show, status: :created, location: @image }
+        format.js 
       else
         format.html { render :new }
         format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
   getLocation();
+  setInterval(function(){getLocation()}, 25000);
 });
 
 var x = document.getElementById("location");
@@ -14,9 +15,27 @@ function getLocation() {
 }
 
 function pushPosition(position) {
+    $('#image_latitude').val(position.coords.latitude);
+    $('#image_longitude').val(position.coords.longitude);
     $.ajax('location.js', {
       format: 'js',
       data: {latitude: position.coords.latitude, longitude: position.coords.longitude}
     })
 }
+
+function pubLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(publishImage);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function publishImage(position) {
+	$.ajax('publish.js', {
+      format: 'js',
+      data: {latitude: position.coords.latitude, longitude: position.coords.longitude}
+    })
+}
+
 

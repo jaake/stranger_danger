@@ -2,24 +2,26 @@ class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   def location
-    location_data = []
-    self.params.each do |p|
-      location_data.append(p[1])
-    end
-    @coords = "#{location_data[0]}, #{location_data[1]}"
-    user_location = Geokit::Geocoders::GoogleGeocoder.geocode "#{@coords}"
-    images = Image.all 
+    @images = Image.all 
+    @lat = params[:latitude]
+    @lng = params[:longitude]
+    @coords = [ @lat, @lng ]
+    user_location = Geokit::Geocoders::GoogleGeocoder.geocode("#{@lat}, #{@lng}") 
     @images_near = []
-    images.each do |image|
-      ll = [image.latitude, image.longitude]
-     @images_near.append(image) if (user_location.distance_to(ll) < 3) 
+    @images.each do |image|
+      ll = ["#{image.latitude}", "#{image.longitude}"]
+      distance = user_location.distance_to(ll)
+      bearing = user_location.heading_to(ll)
+      holder = [distance, image, bearing.round]
+      @images_near.append(holder) if (distance < 10) 
     end
-
+    @images_near.sort!
   end
 
   # GET /images
   # GET /images.json
   def index
+    @image = Image.new
     @images = Image.all
     respond_to do |format|
       format.html
@@ -33,9 +35,8 @@ class ImagesController < ApplicationController
   end
 
   # GET /images/new
-  def new
-    @image = Image.new
-  end
+  #def new
+  #end
 
   # GET /images/1/edit
   def edit
@@ -47,11 +48,7 @@ class ImagesController < ApplicationController
     @image = Image.new(image_params)
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
-      else
-        format.html { render :new }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

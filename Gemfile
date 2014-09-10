@@ -7,8 +7,11 @@ source 'https://rubygems.org'
   gem 'geokit'
 #   Image upload handling
   gem 'paperclip'
+  gem 'remotipart'
 #   JS/Frontend
   gem 'foundation-rails'
+#   Hash tag handling
+  gem 'simple_hashtag'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'

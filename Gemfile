@@ -7,6 +7,7 @@ source 'https://rubygems.org'
   gem 'geokit'
 #   Image upload handling
   gem 'paperclip'
+  gem 'remotipart'
 #   JS/Frontend
   gem 'foundation-rails'
 #   Hash tag handling

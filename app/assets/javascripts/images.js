@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-  $(".control").on('click', 'p', pubLocation);
+  //$(".actions").on('click', pubLocation);
   getLocation();
 });
 
@@ -15,6 +15,8 @@ function getLocation() {
 }
 
 function pushPosition(position) {
+    $('#image_latitude').val(position.coords.latitude);
+    $('#image_longitude').val(position.coords.longitude);
     $.ajax('location.js', {
       format: 'js',
       data: {latitude: position.coords.latitude, longitude: position.coords.longitude}

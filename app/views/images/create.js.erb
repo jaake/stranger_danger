@@ -1,1 +1,8 @@
-$('.publish').slideToggle().html('<%= j render('publish') %>');
+//$('.publish').hide().after('<%= j render('publish') %>');
+// Display a Javascript alert
+alert('success!');
+<% if remotipart_submitted? %>
+  alert('submitted via remotipart')
+<% else %>
+  alert('submitted via native jquery-ujs')
+<% end %>

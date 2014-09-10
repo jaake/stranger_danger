@@ -2,10 +2,73 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.publish {
+html {
+	height: 100%;
+	min-height: 100%;
+}
+
+header {
+	background-color: pink;
+	position: fixed;
+	min-height: 8em;
+	width: 100%;
+	z-index: 1;
+}
+
+body {
+  background-color: #000;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  min-height: 100%;
+}
+
+footer {
+
+}
+
+#tag {
+	position: fixed;
+	bottom: 18px;
+	right: 5px;
+}
+
+#photo {
+	position: fixed;
+	bottom: 2px;
+	left: 5px;
+}
+
+#publish {
+    overflow: hidden;
+}
+
+#image_feed {
+	padding: 10em 0 0 0;
+	
+	& ul {
+      list-style-type: none;
+    }
+    & img {
+      max-height: 25em;
+      width: 100%
+    }
+}
+
+#notify {
 	
 }
 
-.field {
-	padding: 10px
+#lat {
+	display: none;
+}
+
+#lng {
+	display: none;	
+}
+
+.meat {
+	background: url('Nashville_skyline.jpg') no-repeat;
+	overflow: hidden;
 }

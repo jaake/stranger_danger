@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
-  //$(".actions").on('click', pubLocation);
   getLocation();
+  setInterval(function(){getLocation()}, 25000);
 });
 
 var x = document.getElementById("location");

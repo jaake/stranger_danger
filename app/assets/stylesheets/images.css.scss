@@ -7,18 +7,28 @@ html {
 	min-height: 100%;
 }
 
-header {
-	background-color: pink;
-	position: fixed;
-	min-height: 8em;
-	width: 100%;
-	z-index: 1;
+//header {
+	//background-color: pink;
+	//position: fixed;
+	//min-height: 8em;
+	//width: 100%;
+	//z-index: 1;
+//}
+
+@font-face {
+    font-family: 'desyrel';
+    src: url(font-path('desyrel-webfont.eot') + "?#iefix") format('embedded-opentype'),
+         url(font-path('desyrel-webfont.woff')) format('woff'), 
+         url(font-path('desyrel-webfont.ttf'))  format('truetype'),
+         url(font-path('desyrel-webfont.svg') + "#desyrel") format('svg');
 }
 
 body {
+  background: url('Nashville_skyline.png') no-repeat;
   background-color: #000;
+  background-position: 50% 25%;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: desyrel, verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
   min-height: 100%;
@@ -28,16 +38,40 @@ footer {
 
 }
 
+#head {
+	& img {
+	    max-height: 550px;
+	    float:left;
+        position: relative;
+        width: 33%;
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+	}
+
+}
+
+#logo {
+	margin-bottom: 20em;
+	& h1 {
+	color: #FF14AA;
+	font-size: 75px;
+	text-align: center;
+	padding-top: 35px;
+	}
+}
+
 #tag {
+    display: none;
 	position: fixed;
 	bottom: 18px;
-	right: 5px;
+	right: 9px;
 }
 
 #photo {
 	position: fixed;
 	bottom: 2px;
-	left: 5px;
+	left: 20%;
 }
 
 #publish {
@@ -45,14 +79,34 @@ footer {
 }
 
 #image_feed {
-	padding: 10em 0 0 0;
-	
+    //right: 9px;
+	padding: 10px 0 0 0;
+	overflow: hidden;	
 	& ul {
       list-style-type: none;
     }
-    & img {
-      max-height: 25em;
-      width: 100%
+
+}
+
+.image_photo {
+    color: #FF14AA;
+    font-weight: bold;
+    & span {
+        & input {
+            z-index: 999;
+            line-height: 0;
+            font-size: 50px;
+            position: absolute;
+            top: -2px;
+            left: -700px;
+            opacity: 0;
+            filter: alpha(opacity = 0);
+            -ms-filter: "alpha(opacity=0)";
+            cursor: pointer;
+            _cursor: hand;
+            margin: 0;
+            padding:0;
+        }
     }
 }
 
@@ -68,7 +122,41 @@ footer {
 	display: none;	
 }
 
-.meat {
-	background: url('Nashville_skyline.jpg') no-repeat;
-	overflow: hidden;
+.nav {
+	position: relative;
+	max-height: 70px;
+	width: auto;
+	float: right;
+	right: 8%;
+	bottom: 30px;
+}
+
+.square {
+	border-color: #ECECEC;
+	border-style: solid;
+	border-width: 20px 20px 0 20px;
+	background: #ECECEC;
+	padding-bottom: 1em;
+
+	& div {
+	    color: #FF14AA;
+	    font-style: bold;
+	    font-size: 25px;
+	    min-height: 80px;
+	}
+	    
+	& h2 {
+	    position: relative;
+	    top: 20px;
+	    left: 20px;
+	    color: #FF14AA;   
+	    font-style: bold;
+	}
+
+	& p {
+	    color: #FF14AA; 
+	    font-style: italic;
+	    font-size: 10px; 
+	    text-align: center;     
+	}    
 }

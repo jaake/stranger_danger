@@ -13,6 +13,11 @@
 
   <body>
     <header> 
+    <div id="logo" class="small-12 small-centered large-7 large-centered columns">
+      <h1>Stranger</h1>
+      <div id="head" class="small-12 columns"><%= image_tag('face_0.png')%><%= image_tag('face_1.png')%><%= image_tag('face_3.png')%></div>
+      <h1>Danger</h1>
+    </div>
     </header>
 
     <%= yield %>
@@ -54,7 +59,7 @@
 
     <footer>
       <div id="photo" class="field">
-        <%= f.file_field :photo %>
+        <span><%= f.file_field :photo, :class => 'image_photo'%></span>
       </div>  
       <div id="tag" class="actions">
         <%= f.submit %>

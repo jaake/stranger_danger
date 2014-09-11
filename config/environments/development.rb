@@ -34,6 +34,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # include my fonts Dir 
+  config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
   Paperclip.options[:command_path] = "/usr/bin/"
 end

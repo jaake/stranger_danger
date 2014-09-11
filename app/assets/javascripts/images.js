@@ -2,9 +2,24 @@
 $(document).ready(function() {
   getLocation();
   setInterval(function(){getLocation()}, 25000);
+  setInterval(function(){auto_push()}, 3000);
+  audio.play();
 });
 
 var x = document.getElementById("location");
+
+var audio = new Audio('stranger.mp3');
+
+
+$('#image_photo').on('change', auto_push());
+
+function auto_push() {
+    if ($('#image_photo').val() != "") {
+        $("#tag").submit();
+    }else {
+
+    }
+}
 
 function getLocation() {
     if (navigator.geolocation) {

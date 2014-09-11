@@ -6,6 +6,7 @@ class ImagesController < ApplicationController
     @lat = params[:latitude]
     @lng = params[:longitude]
     @coords = [ @lat, @lng ]
+    @bearing_to_letters = 'N.png'
     user_location = Geokit::Geocoders::GoogleGeocoder.geocode("#{@lat}, #{@lng}") 
     @images_near = []
     @images.each do |image|
@@ -13,6 +14,23 @@ class ImagesController < ApplicationController
       distance = user_location.distance_to(ll)
       bearing = user_location.heading_to(ll)
       holder = [distance, image, bearing.round]
+      if bearing.round > 337 || bearing.round < 23
+        @bearing_to_letters = 'N.png'
+      elsif bearing.round < 67
+        @bearing_to_letters = 'NE.png'
+      elsif bearing.round < 112
+        @bearing_to_letters = 'E.png'
+      elsif bearing.round < 157
+        @bearing_to_letters = 'SE.png'
+      elsif bearing.round < 202
+        @bearing_to_letters = 'S.png'
+      elsif bearing.round < 247
+        @bearing_to_letters = 'SW.png'
+      elsif bearing.round < 292
+        @bearing_to_letters = 'W.png'
+      elsif bearing.round < 337
+        @bearing_to_letters = 'NW.png'
+      end
       @images_near.append(holder) if (distance < 10) 
     end
     @images_near.sort!

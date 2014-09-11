@@ -1,7 +1,11 @@
-<p id="location"><%= @coords %></p>
-<ul>
+
   <% @images_near.each do |image| %> 
-  <li><%= image_tag image[1].photo.url %></li>
-  <li><%= image[0].round(2) %> Miles <%= image[2] %> degrees NSEW</li>
+  <div class="square">
+    <%= image_tag image[1].photo.url(:small) %>
+    <div>
+      <h2><%= image[0].round(2) %> Miles </h2>
+      <%= image_tag(@bearing_to_letters, :class => "nav") %>
+    </div>
+  </div>
+  <br>
   <% end %>
-</ul>

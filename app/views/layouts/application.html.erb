@@ -15,7 +15,7 @@
     <header> 
     <div id="logo" class="small-12 small-centered large-7 large-centered columns">
       <h1>Stranger</h1>
-      <div id="head" class="small-12 columns"><%= image_tag('face_0.png')%><%= image_tag('face_1.png')%><%= image_tag('face_3.png')%></div>
+      <div id="head" class="small-12 columns"><%= image_tag(@faces[0])%><%= image_tag(@faces[1])%><%= image_tag(@faces[2])%></div>
       <h1>Danger</h1>
     </div>
     </header>
@@ -59,10 +59,27 @@
 
     <footer>
       <div id="photo" class="field">
-        <span><%= f.file_field :photo, :class => 'image_photo'%></span>
+        <span class="file-wrapper">
+          <%= f.file_field :photo, :class => 'image_photo'%>
+          <span class="button">Photo</span>
+        </span>
       </div>  
       <div id="tag" class="actions">
         <%= f.submit %>
+      </div>
+      <a href="#" id="terms-link" data-reveal-id="terms"><h6>Terms and Conditions</h6></a>
+
+      <div id="terms" class="reveal-modal" data-reveal>
+        <h2>Use at your own risk.</h2>
+        <h4>Everything you post is public and cannot be deleted..</h4>
+
+        <p class="lead">Terms</p>
+        <p>Stranger Danger offers this Web site, including all information, software, products and services available from this Web site or offered as part of or in conjunction with this Web site (Stranger Danger), to you, the user, conditioned upon your acceptance of all of the terms, conditions, policies and notices stated here. Stranger Danger reserves the right to make changes to these Terms and Conditions immediately by posting the changed Terms and Conditions in this location.
+        <p>Your continued use of the Web site constitutes your agreement to all such terms, conditions and notices, and any changes to the Terms and Conditions made by Generic Website.</p>
+        <p>The term 'strangerdanger.io' or 'us' or 'we' refers to the owner of the website. The term 'you' refers to the user or viewer of our website.</p>
+        <p>The use of this website is subject to the following terms of use:</p>
+        <p>Use the website at your own risk. This website is provided to you "as is," without warranty of any kind either express or implied. Neither Stranger Danger nor its employees, agents, third-party information providers, merchants, licensors or the like warrant that the Web site or its operation will be accurate, reliable, uninterrupted or error-free. No agent or representative has the authority to create any warranty regarding the Web site on behalf of Generic Website. Generic Website reserves the right to change or discontinue at any time any aspect or feature of the Web site.</p>
+        <a class="close-reveal-modal">&#215;</a>
       </div>
     </footer>
     </div>

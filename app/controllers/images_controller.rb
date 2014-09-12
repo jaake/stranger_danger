@@ -2,36 +2,36 @@ class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   def location
-    @images = Image.all 
+    images = Image.all 
     @lat = params[:latitude]
     @lng = params[:longitude]
     @coords = [ @lat, @lng ]
-    @bearing_to_letters = 'N.png'
+    bearing_to_letters = 'N.png'
     user_location = Geokit::Geocoders::GoogleGeocoder.geocode("#{@lat}, #{@lng}") 
     @images_near = []
-    @images.each do |image|
+    images.each do |image|
       ll = ["#{image.latitude}", "#{image.longitude}"]
       distance = user_location.distance_to(ll)
       bearing = user_location.heading_to(ll)
-      holder = [distance, image, bearing.round]
       if bearing.round > 337 || bearing.round < 23
-        @bearing_to_letters = 'N.png'
+        bearing_to_letters = 'N.png'
       elsif bearing.round < 67
-        @bearing_to_letters = 'NE.png'
+        bearing_to_letters = 'NE.png'
       elsif bearing.round < 112
-        @bearing_to_letters = 'E.png'
+        bearing_to_letters = 'E.png'
       elsif bearing.round < 157
-        @bearing_to_letters = 'SE.png'
+        bearing_to_letters = 'SE.png'
       elsif bearing.round < 202
-        @bearing_to_letters = 'S.png'
+        bearing_to_letters = 'S.png'
       elsif bearing.round < 247
-        @bearing_to_letters = 'SW.png'
+        bearing_to_letters = 'SW.png'
       elsif bearing.round < 292
-        @bearing_to_letters = 'W.png'
+        bearing_to_letters = 'W.png'
       elsif bearing.round < 337
-        @bearing_to_letters = 'NW.png'
+        bearing_to_letters = 'NW.png'
       end
-      @images_near.append(holder) if (distance < 10) 
+      holder = [distance, image, bearing_to_letters]
+      @images_near.append(holder) if (distance < 3000) 
     end
     @images_near.sort!
   end
@@ -41,6 +41,8 @@ class ImagesController < ApplicationController
   def index
     @image = Image.new
     @images = Image.all
+    @faces = ['face_0.png', 'face_1.png', 'face_2.png', 'face_3.png', 'face_4.png']
+    @faces.shuffle!
     respond_to do |format|
       format.html
       format.js 

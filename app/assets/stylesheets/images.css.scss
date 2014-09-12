@@ -68,12 +68,6 @@ footer {
 	right: 9px;
 }
 
-#photo {
-	position: fixed;
-	bottom: 2px;
-	left: 20%;
-}
-
 #publish {
     overflow: hidden;
 }
@@ -91,23 +85,6 @@ footer {
 .image_photo {
     color: #FF14AA;
     font-weight: bold;
-    & span {
-        & input {
-            z-index: 999;
-            line-height: 0;
-            font-size: 50px;
-            position: absolute;
-            top: -2px;
-            left: -700px;
-            opacity: 0;
-            filter: alpha(opacity = 0);
-            -ms-filter: "alpha(opacity=0)";
-            cursor: pointer;
-            _cursor: hand;
-            margin: 0;
-            padding:0;
-        }
-    }
 }
 
 #notify {
@@ -159,4 +136,50 @@ footer {
 	    font-size: 10px; 
 	    text-align: center;     
 	}    
+}
+
+#photo {
+	position: fixed;
+	bottom: 2px;
+	left: 40%;
+	margin-left: auto;
+    margin-right: auto;
+    right: 0;
+}
+
+.file-wrapper {
+	cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+	& input {
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 100px;
+        z-index: 1;
+        filter: alpha(opacity=1);
+        -moz-opacity: 0.01;
+        opacity: 0.01;
+	}
+	& .button {
+	    background: #FF14AA;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 11px;
+        font-weight: bold;
+        padding: 4px 18px;
+        text-transform: uppercase;
+	}
+}
+
+#terms-link {
+	& h6 {
+	    color: white;
+	}
 }

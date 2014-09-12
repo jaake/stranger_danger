@@ -4,7 +4,7 @@
     <%= image_tag image[1].photo.url(:small) %>
     <div>
       <h2><%= image[0].round(2) %> Miles </h2>
-      <%= image_tag(@bearing_to_letters, :class => "nav") %>
+      <%= image_tag(image[2], :class => "nav") %>
     </div>
   </div>
   <br>

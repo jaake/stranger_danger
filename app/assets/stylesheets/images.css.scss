@@ -140,11 +140,11 @@ footer {
 
 #photo {
 	position: fixed;
+	min-width: 100%;
 	bottom: 2px;
-	left: 40%;
+	left: 50%;
 	margin-left: auto;
     margin-right: auto;
-    right: 0;
 }
 
 .file-wrapper {
@@ -152,6 +152,7 @@ footer {
     display: inline-block;
     overflow: hidden;
     position: relative;
+    right: 38px;
 	& input {
         cursor: pointer;
         height: 100%;
@@ -178,8 +179,23 @@ footer {
 	}
 }
 
+#loader {
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	& img {
+	    position: relative;
+	    right: 10px;
+	}
+}
+
 #terms-link {
 	& h6 {
 	    color: white;
 	}
+}
+
+.test {
+	min-height: 200px;
+	background-color: white;
 }

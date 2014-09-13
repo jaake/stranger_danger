@@ -34,6 +34,7 @@ class ImagesController < ApplicationController
       @images_near.append(holder) if (distance < 3000) 
     end
     @images_near.sort!
+    @images_near = @images_near[0..24]
   end
 
   # GET /images
@@ -51,16 +52,16 @@ class ImagesController < ApplicationController
 
   # GET /images/1
   # GET /images/1.json
-  def show
-  end
+  #def show
+  #end
 
   # GET /images/new
   #def new
   #end
 
   # GET /images/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /images
   # POST /images.json
@@ -89,13 +90,13 @@ class ImagesController < ApplicationController
 
   # DELETE /images/1
   # DELETE /images/1.json
-  def destroy
-    @image.destroy
-    respond_to do |format|
-      format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  #def destroy
+  #  @image.destroy
+  #  respond_to do |format|
+  #    format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

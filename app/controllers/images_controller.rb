@@ -6,9 +6,13 @@ class ImagesController < ApplicationController
     @lat = params[:latitude]
     @lng = params[:longitude]
     @coords = [ @lat, @lng ]
+    ## TODO: Refactor below into module that accepts @lat & @lng as args && git rid of Geokit on lookup.
     bearing_to_letters = 'N.png'
     user_location = Geokit::Geocoders::GoogleGeocoder.geocode("#{@lat}, #{@lng}") 
-    @images_near = []
+    @warmest = []
+    @warmer = []
+    @warm = []
+    @cold = []
     images.each do |image|
       ll = ["#{image.latitude}", "#{image.longitude}"]
       distance = user_location.distance_to(ll)
@@ -30,11 +34,29 @@ class ImagesController < ApplicationController
       elsif bearing.round < 337
         bearing_to_letters = 'NW.png'
       end
-      holder = [distance, image, bearing_to_letters]
-      @images_near.append(holder) if (distance < 3000) 
+      holder = [DateTime.parse(image.created_at.to_s).to_i, image, bearing_to_letters, distance]
+      
+      if distance < 0.11
+        @warmest.append(holder)
+      elsif distance < 1       
+        @warmer.append(holder) 
+      elsif distance < 5.0
+        @warm.append(holder)
+      elsif distance < 25.0
+        @cold.append(holder)
+      end
     end
-    @images_near.sort!
-    @images_near = @images_near[0..24]
+    @warmest.reverse!
+    @warmest = @warmest[0..14]
+    @warmer.reverse!
+    @warmer = @warmer[0..49]
+    @warm.reverse!
+    @warm = @warm[0..99]
+    feed_length = @warm.length + @warmer.length + @warmest.length
+    cold_range_end = 100 - feed_length
+    @cold.reverse!
+    @cold = @cold[0..cold_range_end]
+
   end
 
   # GET /images

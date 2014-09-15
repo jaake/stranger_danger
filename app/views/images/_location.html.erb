@@ -1,9 +1,43 @@
 
-  <% @images_near.each do |image| %> 
+  <% @warmest.each do |image| %> 
   <div class="square">
     <%= image_tag image[1].photo.url(:small) %>
     <div>
-      <h2><%= image[0].round(2) %> Miles </h2>
+      <h2><%= image[3].round(2) %> Miles </h2>
+      <%= image_tag(image[2], :class => "nav") %>
+      <p><%= image[0] %></p>
+    </div>
+  </div>
+  <br>
+  <% end %>
+  <% @warmer.each do |image| %> 
+  <div class="square">
+    <%= image_tag image[1].photo.url(:small) %>
+    <div>
+      <h2><%= image[3].round(2) %> Miles </h2>
+      <%= image_tag(image[2], :class => "nav") %>
+      <p><%= image[0] %></p>
+    </div>
+  </div>
+  <br>
+  <% end %>
+  <% @warm.each do |image| %> 
+  <div class="square">
+    <%= image_tag image[1].photo.url(:small) %>
+    <div>
+      <h2><%= image[3].round(2) %> Miles </h2>
+      <p><%= image[0] %></p>
+      <%= image_tag(image[2], :class => "nav") %>
+    </div>
+  </div>
+  <br>
+  <% end %>
+  <% @cold.each do |image| %> 
+  <div class="square">
+    <%= image_tag image[1].photo.url(:small) %>
+    <div>
+      <h2><%= image[3].round(2) %> Miles </h2>
+      <p><%= image[0] %></p>
       <%= image_tag(image[2], :class => "nav") %>
     </div>
   </div>

@@ -3,10 +3,12 @@ $(document).ready(function() {
   getLocation();
   setInterval(function(){getLocation()}, 30000);
   setInterval(function(){auto_push()}, 2000);
+  //setInterval(function(){colorCode()}, 2000);
   audio.play();
   $('#loader').hide();
 });
 
+var time = new Date().getTime()
 var x = document.getElementById("location");
 var audio = new Audio('stranger.mp3');
 var log = 0;
@@ -45,6 +47,26 @@ function pushPosition(position) {
       format: 'js',
       data: {latitude: position.coords.latitude, longitude: position.coords.longitude}
     })
+}
+
+function colorCode() {
+	var time = new Date().getTime(); 
+    time = time / 1000;
+	$('.square p').each(function( i ) { 
+		if ((time - $( this ).text()) < 600) {
+			$( this ).closest('.square').css({"border-color" : "#7FE0FF", "background-color" : "#7FE0FF"});
+		}else if ((time - $( this ).text()) < 6000) {
+		    $( this ).closest('.square').css({"border-color" : "#B5EDFF", "background-color" : "#B5EDFF"  });
+		}else if ((time - $( this ).text()) < 36000) {
+		    $( this ).closest('.square').css({"border-color" : "#E3F9FF", "background-color" : "#E3F9FF"  });
+		}else if ((time - $( this ).text()) < 144000) {
+		    $( this ).closest('.square').css({"border-color" : "#ECECEC", "background-color" : "#ECECEC"  });
+		}else if ((time - $( this ).text()) < 288000) {
+		    $( this ).closest('.square').css({"border-color" : "#FFEBF8", "background-color" : "#FFEBF8"  });
+		}else {
+		    $( this ).closest('.square').css({"border-color" : "#FFDAF3", "background-color" : "#FFDAF3"  });
+		}
+	})
 }
 
 

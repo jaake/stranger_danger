@@ -34,7 +34,7 @@ class ImagesController < ApplicationController
       @images_near.append(holder) if (distance < 3000) 
     end
     @images_near.sort!
-    @images_near = @images_near[0..24]
+    ##@images_near = @images_near[0..49]
   end
 
   # GET /images

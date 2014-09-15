@@ -134,9 +134,12 @@ footer {
 	    color: #FF14AA; 
 	    font-style: italic;
 	    font-size: 10px; 
-	    text-align: center;     
-	}    
+	    text-align: center; 
+	    display: none;    
+	} 
+
 }
+
 
 #photo {
 	position: fixed;
@@ -193,9 +196,4 @@ footer {
 	& h6 {
 	    color: white;
 	}
-}
-
-.test {
-	min-height: 200px;
-	background-color: white;
 }

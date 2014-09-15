@@ -55,7 +55,6 @@ class ImagesController < ApplicationController
     cold_range_end = 100 - feed_length
     @cold.reverse!
     @cold = @cold[0..cold_range_end]
-
   end
 
   # GET /images
